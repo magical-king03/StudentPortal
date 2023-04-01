@@ -37,39 +37,58 @@ function render(){
         userEmail.innerText = user.email
         userPhno.innerText = user.phno
         userCity.innerText = city[k] 
-        // console.log()
 
         userContainer.appendChild(div)
         div.appendChild(userName)
         div.appendChild(userEmail)
         div.appendChild(userPhno)
         div.appendChild(userCity)
-
     })
 }
 
+function validateForm() {
+    let x = document.getElementById('name').value;
+    let y = document.getElementById('email').value
+    let z = document.getElementById('phno').value
+    if (x == "") {
+      alert("Name must be filled out");
+      return false;
+    }
+    if (y == "") {
+        alert("Email must be filled out");
+        return false;
+      }
+    if (z == "") {
+        alert("Phone number must be filled out");
+        return false;
+      }
+  }
+
 function register(){
-    let name = document.getElementById('name')
-    let email = document.getElementById('email')
-    let phno = document.getElementById('phno')
-
-    let tempuser = {
-        name: name.value,
-        email: email.value,
-        phno: phno.value,
+    let status = validateForm()
+    if(status != false){
+        let name = document.getElementById('name')
+        let email = document.getElementById('email')
+        let phno = document.getElementById('phno')
+        let tempuser = {
+            name: name.value,
+            email: email.value,
+            phno: phno.value,
+        }
+    
+        let usercount = users.filter((user)=>{
+            return user.email == email.value
+        })
+    
+        if(usercount.length == 0)
+        {
+            users.push(tempuser)
+            success()
+            render()
+        }
+        else{
+            fail();
+        }
     }
 
-    let usercount = users.filter((user)=>{
-        return user.email == email.value
-    })
-
-    if(usercount.length == 0)
-    {
-        users.push(tempuser)
-        success()
-        render();
-    }
-    else{
-        fail();
-    }
 }
