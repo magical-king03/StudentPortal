@@ -57,11 +57,15 @@ function validateForm() {
     if (y == "") {
         alert("Email must be filled out");
         return false;
-      }
+    }
     if (z == "") {
         alert("Phone number must be filled out");
         return false;
-      }
+    }
+    if(z.length != 10){
+        alert("Invalid Phone number");
+        return false;
+    }
   }
 
 function register(){
